@@ -1,22 +1,21 @@
 require 'httparty'
 
 # Exercise 1
-toronto_wards_response = HTTParty.get('https://represent.opennorth.ca/boundaries/toronto-wards/')
+ottawa_wards_response = HTTParty.get('https://represent.opennorth.ca/boundaries/?sets=ottawa-wards')
 
-toronto_wards_json = JSON.parse(toronto_wards_response.body)
+ottawa_wards_json = JSON.parse(ottawa_wards_response.body)
 
-toronto_wards_json.each do |ward|
-
+ottawa_wards_json['objects'].each do |ward|
   puts ward["name"]
 end
 
 
 # Exercise 2
-repersentatives_response = HTTParty.get('https://represent.opennorth.ca/repersentatives/')
+elections_response = HTTParty.get('https://represent.opennorth.ca/elections/')
 
-repersentatives_json = JSON.parse(repersentatives_response.body)
+elections_json = JSON.parse(elections_response.body)
 
-repersentatives['objects'].each do |repersentative|
+elections_json['objects'].each do |election|
 
-  puts repersentative["first_name"]["last_name"]
+  puts "#{election['name']}, date: #{election['election_date']}"
 end
